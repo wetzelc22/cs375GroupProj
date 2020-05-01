@@ -38,7 +38,16 @@ int main(int argc, char *argv[]){
 	ifstream infile(argv[1]);
 	string line = " ";
 	getline(infile,line);
-	int check = stoi(line);
+	stringstream linestream(line);
+	string value;
+	int check = 0;
+	while (getline(linestream, value, ',')){
+			if (value == "start"){
+			}
+			else{
+				check = stoi(value);
+			}
+	}
 	int **start_array = (int**)malloc(sizeof(int*)*(check));
 		for (int i = 0; i < check; i++){
 			start_array[i] = (int *)malloc(check * sizeof(int*));
@@ -48,17 +57,27 @@ int main(int argc, char *argv[]){
 		for (int i = 0; i < check; i++){
 			opt_prev[i] = (int *)malloc(check * sizeof(int*));
 		}
-	for (int i = 0; i < check; i++){
-		for (int j = 0; j < check; j++){
-			opt_prev[i][j] = 0;
-		}
-	}
 	while(getline(infile,line)){
-		vector<string> test;
 		int iter_2 = 0;
 		stringstream linestream(line);
 		string value;
+		bool new_start = false;
 		while (getline(linestream, value, ',')){
+			if (value == "start"){
+				iter = 0;
+				floyd_warshall(start_array,opt_prev,check);
+				new_start = true;	
+				continue;	
+			}
+			if (new_start == true){
+				check = stoi(value);
+				for (int i = 0; i < check; i++){
+					for (int j = 0; j < check; j++){
+						opt_prev[i] = 0;
+						start_array[i] = 0;
+					}
+				}
+			}
 			if (value == "?"){
 				start_array[iter][iter_2] = INT_MAX;
 			}
@@ -69,12 +88,14 @@ int main(int argc, char *argv[]){
 		}
 		iter++;
 	}
+#if 0
 	for (int i = 0; i < check; i++){
 		for (int j = 0; j < check; j++){
 			cout << start_array[i][j] << ",";
 		}
 		cout << endl;
 	}
+#endif
 	floyd_warshall(start_array, opt_prev, check);
 	for (int i = 0; i < check; i++){
 		for (int j = 0; j < check; j++){
