@@ -5,14 +5,14 @@ def main():
 	assert(len(sys.argv) > 1)
 	args = str(sys.argv)
 	vert_count = int(sys.argv[1])
-	num_edges = int(sys.argv[2])
-	lower_bound = int(sys.argv[3])
-	upper_bound = int(sys.argv[4])
+	num_edges = vert_count // 2
+	lower_bound = int(sys.argv[2])
+	upper_bound = int(sys.argv[3])
 
 	#create fileid with vert and edge info
-	file = str(vert_count) + "_" + str(num_edges) + ".txt"
+	file = str(vert_count) + "_" + ".txt"
 	fp = open(file, 'w')
-	fp.write("start," + str(vert_count)+"\n")
+	fp.write(str(vert_count)+"\n")
 
 	#create rand adj for each vertex
 	count = 0
@@ -39,9 +39,9 @@ def main():
 					fp.write(str(0) + ',')
 			else:
 				if(i == vert_count - 1):
-					fp.write(str(-1) + '\n')
+					fp.write("?\n")
 				else:
-					fp.write(str(-1) + ',')
+					fp.write(str("?,"))
 		count += 1
 	fp.close()
 	print("File name: " + file)

@@ -99,7 +99,16 @@ int main(int argc, char *argv[]){
 	floyd_warshall(start_array, opt_prev, check);
 	for (int i = 0; i < check; i++){
 		for (int j = 0; j < check; j++){
-			cout << start_array[i][j] << ",";
+
+			if(start_array[i][j] == INT_MAX) {
+				if(j != check-1) 
+				cout << "inf,";
+				else cout << "inf" << endl;
+			}else{
+				if(j != check-1)
+				cout << start_array[i][j] << ",";
+				else cout << start_array[i][j] << endl;
+			}
 		}
 		cout << endl;
 	}
