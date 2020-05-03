@@ -5,12 +5,12 @@ def main():
 	assert(len(sys.argv) > 1)
 	args = str(sys.argv)
 	vert_count = int(sys.argv[1])
-	num_edges = vert_count // 2
-	lower_bound = int(sys.argv[2])
-	upper_bound = int(sys.argv[3])
+	num_edges = int(sys.argv[2])
+	lower_bound = int(sys.argv[3])
+	upper_bound = int(sys.argv[4])
 
 	#create fileid with vert and edge info
-	file = str(vert_count) + ".txt"
+	file = str(num_edges) + ".txt"
 	fp = open(file, 'w')
 	fp.write(str(vert_count)+"\n")
 
@@ -19,7 +19,7 @@ def main():
 	while count < vert_count :
 		edge_map = {}
 		while len(edge_map) != num_edges:
-			adj = int(random.uniform(0, vert_count-1) // 1)
+			adj = int(random.uniform(0, vert_count-1)//1)
 			if adj not in edge_map and adj != count:
 				edge_map[adj] = int(random.uniform(lower_bound, upper_bound) // 1)
 			

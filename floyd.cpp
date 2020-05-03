@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
 	floyd_warshall(start_array, opt_prev, check);
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
-	outfile << duration.count() << "," << check << endl;
+	outfile << argv[2]  << "," << duration.count() << endl;
 # if 0
 	for (int i = 0; i < check; i++){
 		for (int j = 0; j < check; j++){
@@ -94,5 +94,10 @@ int main(int argc, char *argv[]){
 		cout << endl;
 
 	}
+	for(int i = 0; i < check; i++){
+		free(start_array[i]);
+	}
+	free(start_array);
+
 # endif
 }
