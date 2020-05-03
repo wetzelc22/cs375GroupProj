@@ -2,9 +2,13 @@
 
 A=0
 B=15
-trials=11
+trials=1000
+
+rm timings.txt
 
 for((j=3;j<=$trials;j++));
 do
-	time ./floyd $j.txt
+	./floyd $j.txt
+	rm $j.txt
 done
+

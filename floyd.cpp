@@ -27,7 +27,7 @@ void floyd_warshall(int **start,int **opt_prev, int num){
 				}
 				if (start[i][j] > start[i][k] + start[k][j]){
 					start[i][j] = start[i][k] + start[k][j];
-					cout << "Replaced something" << endl;
+					//cout << "Replaced something" << endl;
 					opt_prev[i][j] = k + 1;
 					
 				}
@@ -75,8 +75,9 @@ int main(int argc, char *argv[]){
 	auto start = chrono::high_resolution_clock::now();
 	floyd_warshall(start_array, opt_prev, check);
 	auto stop = chrono::high_resolution_clock::now();
-	auto duration = chrono::duration_cast<chrono::microseconds>(stop-start);
+	auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
 	outfile << duration.count() << "," << check << endl;
+# if 0
 	for (int i = 0; i < check; i++){
 		for (int j = 0; j < check; j++){
 
@@ -91,5 +92,7 @@ int main(int argc, char *argv[]){
 			}
 		}
 		cout << endl;
+
 	}
+# endif
 }
