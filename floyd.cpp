@@ -10,7 +10,28 @@
 #include <utility>
 #include <chrono>
 #include <limits.h>
+
 using namespace std;
+
+
+
+void path(int ** p, int q, int r){
+	if(p[q][r] != 0){
+		//This means there is some intermediate node between q and r
+		path(p, q, p[q][r]-1);
+		cout << "v" << p[q][r] << endl;
+		path(p, p[q][r]-1, r);
+	}else{
+		//No intermediate node
+		return;		
+	}
+
+
+}
+
+
+
+
 void floyd_warshall(int **start,int **opt_prev, int num){
 	for (int k = 0; k < num; k++){
 		
@@ -76,7 +97,12 @@ int main(int argc, char *argv[]){
 	floyd_warshall(start_array, opt_prev, check);
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
-	outfile << argv[2]  << "," << duration.count() << endl;
+	//outfile << argv[2]  << "," << duration.count() << endl;
+	int q = atoi(argv[2]);
+	int r = atoi(argv[3]);
+	cout << "v" << q << endl;
+	path(opt_prev, q-1, r-1);
+	cout << "v" << r << endl;
 # if 0
 	for (int i = 0; i < check; i++){
 		for (int j = 0; j < check; j++){

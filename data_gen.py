@@ -10,7 +10,7 @@ def main():
 	upper_bound = int(sys.argv[4])
 
 	#create fileid with vert and edge info
-	file = str(num_edges) + ".txt"
+	file = str(vert_count) + ".txt"
 	fp = open(file, 'w')
 	fp.write(str(vert_count)+"\n")
 
